@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>موقع أسئلة</title>
+<style>
+    body {
+        margin: 0;
+        font-family: Tahoma, Arial;
+        background: #111;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        text-align: center;
+        cursor: pointer;
+    }
+    #box {
+        display: none;
+        max-width: 90%;
+    }
+    img {
+        max-width: 100%;
+        border-radius: 12px;
+        margin-top: 15px;
+    }
+    button {
+        margin-top: 20px;
+        padding: 10px 25px;
+        font-size: 16px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+
+<div id="start">اضغط على الشاشة للبدء</div>
+
+<div id="box">
+    <h2 id="text"></h2>
+    <img id="image" src="">
+    <br>
+    <button onclick="next()">التالي</button>
+</div>
+
+<script>
+const steps = [
+    {
+        text: "السؤال الأول: تحب النبي محمد؟",
+        img: "https://via.placeholder.com/400"
+    },
+    {
+        text: "السؤال الثاني: تحب الله؟",
+        img: "https://via.placeholder.com/400/ff0000"
+    },
+    {
+        text: "شكراً لك 🌟",
+        img: "https://via.placeholder.com/400/00ff00"
+    }
+];
+
+let index = 0;
+
+document.body.onclick = () => {
+    document.getElementById("start").style.display = "none";
+    document.getElementById("box").style.display = "block";
+    show();
+    document.body.onclick = null;
+};
+
+function show() {
+    document.getElementById("text").innerText = steps[index].text;
+    document.getElementById("image").src = steps[index].img;
+}
+
+function next() {
+    if (index < steps.length - 1) {
+        index++;
+        show();
+    }
+}
+</script>
+
+</body>
+</html>
