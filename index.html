@@ -33,16 +33,10 @@ body {
     border-radius: 25px;
     backdrop-filter: blur(12px);
     box-shadow: 0 0 40px rgba(255,255,255,0.3);
-    animation: pop 0.6s ease;
-}
-
-@keyframes pop {
-    from { transform: scale(0.85); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
 }
 
 img {
-    width: 160px;
+    width: 150px;
     border-radius: 50%;
     margin-bottom: 15px;
 }
@@ -52,6 +46,7 @@ img {
     gap: 15px;
     justify-content: center;
     margin-top: 20px;
+    flex-wrap: wrap;
 }
 
 button {
@@ -62,25 +57,11 @@ button {
     cursor: pointer;
     transition: 0.3s;
     color: white;
-}
-
-.yes {
     background: linear-gradient(135deg, #ff4fa3, #ff85c2);
-}
-
-.no {
-    background: rgba(255,255,255,0.25);
 }
 
 button:hover {
     transform: scale(1.1);
-}
-
-#msg {
-    margin-top: 15px;
-    color: #ffd6e9;
-    font-size: 14px;
-    display: none;
 }
 </style>
 </head>
@@ -90,13 +71,7 @@ button:hover {
 <div id="box">
     <img id="image">
     <h2 id="text"></h2>
-
-    <div class="buttons">
-        <button class="yes" id="yesBtn" onclick="pressYes()">إي</button>
-        <button class="no" id="noBtn" onclick="pressNo()">لا</button>
-    </div>
-
-    <div id="msg">نعتذر ما تكدر تختار إي، اضغط لا</div>
+    <div class="buttons" id="buttons"></div>
 </div>
 
 <script>
@@ -104,66 +79,74 @@ const steps = [
     {
         text: "انتِ شهد؟",
         img: "https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif",
-        yes: "إي",
-        no: "لا"
+        buttons: [
+            { label: "إي", next: true },
+        ]
     },
     {
         text: "هلو شهد 😍",
         img: "https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif",
-        yes: "هلا بيك",
-        no: "لا"
+        buttons: [
+            { label: "هلا بيك", next: true }
+        ]
     },
     {
         text: "هل تحبيني؟ 😘😘",
         img: "https://media.giphy.com/media/26FLdmIp6wJr91JAI/giphy.gif",
-        yes: "إي",
-        no: "لا"
+        buttons: [
+            { label: "إي", next: true },
+            { label: "لا", next: true }
+        ]
     },
     {
         text: "ليش 😡😡",
         img: "https://media.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.gif",
-        yes: "أحسن",
-        no: "لا"
+        buttons: [
+            { label: "أحسن", next: true }
+        ]
     },
     {
         text: "انتِ متأكدة ما تحبيني؟ 😡😡",
         img: "https://media.giphy.com/media/l4FGuhL4U2WyjdkaY/giphy.gif",
-        yes: "إي",
-        no: "لا"
+        buttons: [
+            { label: "إي", next: true }
+        ]
     },
     {
-        text: "عادي... أصلاً ما أريد أعرف 😌🌷",
+        text: "عادي أصلاً ما أريد أعرف 😌🌷",
         img: "https://media.giphy.com/media/3o7TKsQ8oQ6Z6R5EBy/giphy.gif",
-        yes: "إي",
-        no: "لا"
+        buttons: [
+            { label: "تمام؟", next: true }
+        ]
     },
     {
         text: "لأن اني احبججج 😍😍😍",
         img: "https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif",
-        yes: "❤️",
-        no: "❤️"
+        buttons: []
     }
 ];
 
 let index = 0;
 
 function show() {
-    document.getElementById("text").innerText = steps[index].text;
-    document.getElementById("image").src = steps[index].img;
-    document.getElementById("yesBtn").innerText = steps[index].yes;
-    document.getElementById("noBtn").innerText = steps[index].no;
-    document.getElementById("msg").style.display = "none";
-}
+    const step = steps[index];
+    document.getElementById("text").innerText = step.text;
+    document.getElementById("image").src = step.img;
 
-function pressYes() {
-    document.getElementById("msg").style.display = "block";
-}
+    const btnBox = document.getElementById("buttons");
+    btnBox.innerHTML = "";
 
-function pressNo() {
-    if (index < steps.length - 1) {
-        index++;
-        show();
-    }
+    step.buttons.forEach(btn => {
+        const b = document.createElement("button");
+        b.innerText = btn.label;
+        b.onclick = () => {
+            if (btn.next && index < steps.length - 1) {
+                index++;
+                show();
+            }
+        };
+        btnBox.appendChild(b);
+    });
 }
 
 show();
