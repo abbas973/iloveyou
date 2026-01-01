@@ -2,7 +2,7 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>موقع أسئلة</title>
+<title>💖</title>
 
 <style>
 body {
@@ -18,7 +18,6 @@ body {
     height: 100vh;
     text-align: center;
     overflow: hidden;
-    cursor: pointer;
 }
 
 @keyframes bgMove {
@@ -27,48 +26,14 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-/* صور حب متحركة بالخلفية */
-.bg-love {
-    position: fixed;
-    bottom: -120px;
-    opacity: 0.7;
-    animation: floatUp 16s linear forwards;
-    pointer-events: none;
-}
-
-@keyframes floatUp {
-    from {
-        transform: translateY(0) scale(0.8);
-        opacity: 0.8;
-    }
-    to {
-        transform: translateY(-140vh) scale(1.3);
-        opacity: 0;
-    }
-}
-
-#start {
-    font-size: 28px;
-    font-weight: bold;
-    animation: pulse 1.5s infinite;
-    text-shadow: 0 0 15px rgba(255,255,255,0.8);
-}
-
-@keyframes pulse {
-    0% { opacity: 0.5; }
-    50% { opacity: 1; }
-    100% { opacity: 0.5; }
-}
-
 #box {
-    display: none;
     max-width: 90%;
     background: rgba(0,0,0,0.35);
     padding: 25px;
     border-radius: 25px;
     backdrop-filter: blur(12px);
     box-shadow: 0 0 40px rgba(255,255,255,0.3);
-    animation: pop 0.7s ease;
+    animation: pop 0.6s ease;
 }
 
 @keyframes pop {
@@ -76,104 +41,132 @@ body {
     to { transform: scale(1); opacity: 1; }
 }
 
-img.main {
-    max-width: 100%;
-    border-radius: 20px;
-    margin-top: 10px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.6);
-    animation: zoom 0.6s ease;
+img {
+    width: 160px;
+    border-radius: 50%;
+    margin-bottom: 15px;
 }
 
-@keyframes zoom {
-    from { transform: scale(0.9); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
+.buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
 }
 
 button {
-    margin-top: 25px;
-    padding: 14px 40px;
-    font-size: 17px;
+    padding: 12px 30px;
+    font-size: 16px;
     border: none;
-    border-radius: 40px;
+    border-radius: 30px;
     cursor: pointer;
-    background: linear-gradient(135deg, #ff2f92, #ff94d2);
-    color: white;
-    box-shadow: 0 10px 30px rgba(255, 100, 180, 0.7);
     transition: 0.3s;
+    color: white;
+}
+
+.yes {
+    background: linear-gradient(135deg, #ff4fa3, #ff85c2);
+}
+
+.no {
+    background: rgba(255,255,255,0.25);
 }
 
 button:hover {
-    transform: scale(1.08);
-    box-shadow: 0 15px 45px rgba(255, 120, 200, 0.9);
+    transform: scale(1.1);
+}
+
+#msg {
+    margin-top: 15px;
+    color: #ffd6e9;
+    font-size: 14px;
+    display: none;
 }
 </style>
 </head>
 
 <body>
 
-<div id="start">💖 اضغط للبدء 💖</div>
-
 <div id="box">
+    <img id="image">
     <h2 id="text"></h2>
-    <img id="image" class="main">
-    <br>
-    <button onclick="next()">التالي 💗</button>
+
+    <div class="buttons">
+        <button class="yes" id="yesBtn" onclick="pressYes()">إي</button>
+        <button class="no" id="noBtn" onclick="pressNo()">لا</button>
+    </div>
+
+    <div id="msg">نعتذر ما تكدر تختار إي، اضغط لا</div>
 </div>
 
 <script>
 const steps = [
     {
-        text: "💖 هل تؤمن بالحب من أول نظرة؟",
-        img: "https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif"
+        text: "انتِ شهد؟",
+        img: "https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif",
+        yes: "إي",
+        no: "لا"
     },
     {
-        text: "💞 هل تحب شخص يهتم بتفاصيلك؟",
-        img: "https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif"
+        text: "هلو شهد 😍",
+        img: "https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif",
+        yes: "هلا بيك",
+        no: "لا"
     },
     {
-        text: "💕 شكراً لمشاعرك الجميلة",
-        img: "https://media.giphy.com/media/26FLdmIp6wJr91JAI/giphy.gif"
+        text: "هل تحبيني؟ 😘😘",
+        img: "https://media.giphy.com/media/26FLdmIp6wJr91JAI/giphy.gif",
+        yes: "إي",
+        no: "لا"
+    },
+    {
+        text: "ليش 😡😡",
+        img: "https://media.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.gif",
+        yes: "أحسن",
+        no: "لا"
+    },
+    {
+        text: "انتِ متأكدة ما تحبيني؟ 😡😡",
+        img: "https://media.giphy.com/media/l4FGuhL4U2WyjdkaY/giphy.gif",
+        yes: "إي",
+        no: "لا"
+    },
+    {
+        text: "عادي... أصلاً ما أريد أعرف 😌🌷",
+        img: "https://media.giphy.com/media/3o7TKsQ8oQ6Z6R5EBy/giphy.gif",
+        yes: "إي",
+        no: "لا"
+    },
+    {
+        text: "لأن اني احبججج 😍😍😍",
+        img: "https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif",
+        yes: "❤️",
+        no: "❤️"
     }
 ];
 
 let index = 0;
 
-document.body.onclick = () => {
-    document.getElementById("start").style.display = "none";
-    document.getElementById("box").style.display = "block";
-    show();
-    document.body.onclick = null;
-};
-
 function show() {
     document.getElementById("text").innerText = steps[index].text;
     document.getElementById("image").src = steps[index].img;
+    document.getElementById("yesBtn").innerText = steps[index].yes;
+    document.getElementById("noBtn").innerText = steps[index].no;
+    document.getElementById("msg").style.display = "none";
 }
 
-function next() {
+function pressYes() {
+    document.getElementById("msg").style.display = "block";
+}
+
+function pressNo() {
     if (index < steps.length - 1) {
         index++;
         show();
     }
 }
 
-/* صور حب متحركة بالخلفية */
-const loveGifs = [
-    "https://media.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.gif",
-    "https://media.giphy.com/media/l4FGuhL4U2WyjdkaY/giphy.gif",
-    "https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif",
-    "https://media.giphy.com/media/3o7TKsQ8oQ6Z6R5EBy/giphy.gif"
-];
-
-setInterval(() => {
-    const img = document.createElement("img");
-    img.className = "bg-love";
-    img.src = loveGifs[Math.floor(Math.random() * loveGifs.length)];
-    img.style.left = Math.random() * 100 + "vw";
-    img.style.width = (60 + Math.random() * 90) + "px";
-    document.body.appendChild(img);
-    setTimeout(() => img.remove(), 16000);
-}, 1800);
+show();
 </script>
 
 </body>
