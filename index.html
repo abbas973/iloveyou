@@ -224,7 +224,12 @@ function show() {
     const imgEl = document.getElementById("image");
     const btnBox = document.getElementById("buttons");
 
+    // حل مشكلة العربي
+if (step.text === "عادي… لأن أدري تحبيني 😍😍😍") {
+    textEl.innerText = step.text;
+} else {
     typeText(textEl, step.text);
+}
     imgEl.src = step.img;
     btnBox.innerHTML = "";
 
