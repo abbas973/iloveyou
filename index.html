@@ -164,7 +164,7 @@ const steps = [
 
 { text: "عادي… لأن أدري تحبيني 😍😍😍",
   img: "https://via.placeholder.com/400/000000/ff0044?text=❤",
-  buttons: [{ label: "شو انت واثق من نفسك؟ ولي ولي", next: false }] }
+  buttons: [{ label: "تمام؟ ❤️", next: false }] }
 ];
 
 let index = 0;
@@ -197,11 +197,22 @@ function show() {
     const btnBox = document.getElementById("buttons");
     btnBox.innerHTML = "";
 
+    // أزرار الخطوة العادية
     step.buttons.forEach(btn => {
         const b = document.createElement("button");
         b.innerText = btn.label;
 
         b.onclick = () => {
+            // الزر "شو انت واثق من نفسك؟ ولي ولي"
+            if (b.innerText === "شو انت واثق من نفسك؟ ولي ولي") {
+                const a = document.createElement("div");
+                a.className = "alert";
+                a.innerText = "آه! واضح إنك واثق من نفسك 😏💖";
+                document.body.appendChild(a);
+                setTimeout(() => a.remove(), 4000);
+                return;
+            }
+
             if (btn.alert) {
                 const a = document.createElement("div");
                 a.className = "alert";
@@ -221,6 +232,18 @@ function show() {
         };
         btnBox.appendChild(b);
     });
+
+    // تأكد أن الزر موجود في كل خطوة
+    const extraButton = document.createElement("button");
+    extraButton.innerText = "شو انت واثق من نفسك؟ ولي ولي";
+    extraButton.onclick = () => {
+        const a = document.createElement("div");
+        a.className = "alert";
+        a.innerText = "آه! واضح إنك واثق من نفسك 😏💖";
+        document.body.appendChild(a);
+        setTimeout(() => a.remove(), 4000);
+    };
+    btnBox.appendChild(extraButton);
 }
 </script>
 
