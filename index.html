@@ -3,82 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>هدية خاصة</title>
+    <title>إسراء - مفاجأة</title>
     <style>
+        :root {
+            --bg-color: #2c2137; /* اللون الغامق للخلفية كما في الفيديو */
+            --accent-pink: #ff89bc;
+            --button-pink: #d14d98;
+            --text-color: #ffffff;
+        }
+
         body {
-            background-color: #fce4ec; /* لون وردي فاتح */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
+            font-family: 'Arial', sans-serif;
             overflow: hidden;
         }
-        .container {
-            text-align: center;
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            max-width: 400px;
+
+        #app-container {
             width: 90%;
+            max-width: 400px;
+            background-color: #a855f7; /* الخلفية البنفسجية للصندوق */
+            border-radius: 30px;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+            position: relative;
         }
+
+        .screen { display: none; }
+        .screen.active { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
         img {
-            width: 150px;
-            margin-bottom: 20px;
+            width: 180px;
+            height: auto;
+            margin-bottom: 25px;
         }
-        h2 { color: #d81b60; }
+
+        .question-text {
+            color: white;
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+            font-weight: bold;
+            line-height: 1.6;
+        }
+
         button {
-            background-color: #ff4081;
+            background-color: var(--button-pink);
             color: white;
             border: none;
-            padding: 10px 25px;
-            border-radius: 50px;
-            font-size: 18px;
+            padding: 12px 40px;
+            border-radius: 25px;
+            font-size: 1.1rem;
             cursor: pointer;
-            transition: 0.3s;
-            margin-top: 15px;
+            width: 80%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
         }
-        button:hover { background-color: #c2185b; }
-        .hidden { display: none; }
+
+        button:active { transform: scale(0.95); }
+
+        .heart-btn {
+            font-size: 2.5rem;
+            background: none;
+            box-shadow: none;
+            color: #ff2e8c;
+        }
+
+        .final-text {
+            font-size: 1rem;
+            text-align: justify;
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 10px;
+        }
     </style>
 </head>
 <body>
 
-<div class="container" id="card">
-    <div id="step1">
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIycXN3bmx3eXN3eXN3eXN3eXN3eXN3eXN3eXN3eXN3eXN3eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/vR4i7tOt9YpLID3U5T/giphy.gif" alt="Hello Kitty">
-        <h2>أنتي شهد؟</h2>
-        <button onclick="nextStep(2)">اي أنا ❤️</button>
+<div id="app-container">
+    <div class="screen active" id="s1">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIycXN3bmx3eXN3eXN3eXN3eXN3eXN3eXN3eXN3eXN3eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/vR4i7tOt9YpLID3U5T/giphy.gif">
+        <div class="question-text">انتي شهد؟</div>
+        <button onclick="showScreen('s2')">اي اسراء 🙋‍♀️</button>
     </div>
 
-    <div id="step2" class="hidden">
-        <h2>عندي سؤال الج..</h2>
-        <button onclick="nextStep(3)">شنو هو؟ 🧐</button>
+    <div class="screen" id="s2">
+        <img src="https://media.giphy.com/media/LpDmM2WXO6GfSeUgzS/giphy.gif">
+        <div class="question-text">اسراء عندي سؤال الجججج</div>
+        <button onclick="showScreen('s3')">شنو هو؟ 🤔</button>
     </div>
 
-    <div id="step3" class="hidden">
-        <h2>تحبين ديكستر لو لا؟</h2>
-        <button onclick="nextStep(4)">أكيد أحبه ❤️</button>
+    <div class="screen" id="s3">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYzh0ZjZpMXF4eXN3bmx3eXN3eXN3eXN3eXN3eXN3eXN3eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/3oz8xRI3m4xP9V07hm/giphy.gif">
+        <div class="question-text">تحبين ديكستر لو لا؟؟ 🌝</div>
+        <button onclick="showScreen('s4')">هااا 🫣</button>
     </div>
 
-    <div id="step4" class="hidden">
-        <h2 style="font-size: 1.2rem;">رأيتُ فيكِ جمالاً فاقَ الوصفَ.. <br> أعشقكِ يا كل دنيتي ❤️</h2>
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIycXN3bmx3eXN3eXN3eXN3eXN3eXN3eXN3eXN3eXN3eXN3eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/LpDmM2WXO6GfSeUgzS/giphy.gif" style="width:100px;">
+    <div class="screen" id="s4">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIycXN3bmx3eXN3eXN3eXN3eXN3eXN3eXN3eXN3eXN3eXN3eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/LpDmM2WXO6GfSeUgzS/giphy.gif">
+        <div class="question-text">اذا تحبين احمد دوسي على القلب</div>
+        <button class="heart-btn" onclick="showScreen('s5')">❤️</button>
+    </div>
+
+    <div class="screen" id="s5">
+        <div class="question-text final-text">
+            رأيتُ بوصف جمالكِ الأقوال ووراءكِ فاتننت بكِ العقول، ومن الله بكِ الجمال تجمل حتى صار لجمالك وقار.. <br><br>
+            أعشقك وأحبك ❤️
+        </div>
+        <button onclick="location.reload()" style="width: auto;">العودة للبداية</button>
     </div>
 </div>
 
 <script>
-    function nextStep(stepNumber) {
-        // إخفاء كل الخطوات
-        document.getElementById('step1').classList.add('hidden');
-        document.getElementById('step2').classList.add('hidden');
-        document.getElementById('step3').classList.add('hidden');
-        document.getElementById('step4').classList.add('hidden');
-
-        // إظهار الخطوة المطلوبة
-        document.getElementById('step' + stepNumber).classList.remove('hidden');
+    function showScreen(screenId) {
+        // إخفاء كل الشاشات
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        // إظهار الشاشة المطلوبة
+        document.getElementById(screenId).classList.add('active');
     }
 </script>
 
