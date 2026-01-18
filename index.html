@@ -3,138 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إسراء - مفاجأة</title>
+    <title>إلى إسراء</title>
     <style>
-        :root {
-            --bg-color: #2c2137; /* اللون الغامق للخلفية كما في الفيديو */
-            --accent-pink: #ff89bc;
-            --button-pink: #d14d98;
-            --text-color: #ffffff;
-        }
-
+        /* تنسيق الخلفية السوداء العامة */
         body {
-            background-color: var(--bg-color);
+            background-color: #000000;
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow: hidden;
         }
 
-        #app-container {
-            width: 90%;
-            max-width: 400px;
-            background-color: #a855f7; /* الخلفية البنفسجية للصندوق */
-            border-radius: 30px;
-            padding: 40px 20px;
+        /* الحاوية البنفسجية مثل الفيديو */
+        #container {
+            width: 320px;
+            background: linear-gradient(180deg, #b06ab3, #4568dc); /* تدرج بنفسجي */
+            border-radius: 40px;
+            padding: 30px 20px;
             text-align: center;
-            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             position: relative;
         }
 
-        .screen { display: none; }
-        .screen.active { 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            animation: fadeIn 0.5s ease-in;
+        .step { display: none; }
+        .active { display: flex; flex-direction: column; align-items: center; animation: zoomIn 0.3s ease-out; }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
+        /* صور هيلو كيتي */
         img {
-            width: 180px;
+            width: 140px;
             height: auto;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2));
         }
 
-        .question-text {
+        /* نصوص المحادثة */
+        .text-bubble {
+            background: rgba(255, 255, 255, 0.2);
             color: white;
-            font-size: 1.4rem;
-            margin-bottom: 30px;
-            font-weight: bold;
-            line-height: 1.6;
+            padding: 12px 20px;
+            border-radius: 20px;
+            font-size: 16px;
+            margin-bottom: 25px;
+            width: fit-content;
+            border: 1px solid rgba(255,255,255,0.3);
         }
 
+        /* الأزرار الوردية العريضة */
         button {
-            background-color: var(--button-pink);
+            background-color: #d81b60;
             color: white;
             border: none;
-            padding: 12px 40px;
+            padding: 12px 30px;
             border-radius: 25px;
-            font-size: 1.1rem;
+            font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
-            width: 80%;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            transition: transform 0.2s;
+            width: 90%;
+            transition: 0.2s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
-        button:active { transform: scale(0.95); }
+        button:active { transform: scale(0.9); }
 
+        /* زر القلب */
         .heart-btn {
-            font-size: 2.5rem;
-            background: none;
-            box-shadow: none;
-            color: #ff2e8c;
+            background: #ff4081;
+            font-size: 24px;
+            padding: 15px;
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .final-text {
-            font-size: 1rem;
-            text-align: justify;
-            max-height: 300px;
+        /* نص القصيدة الطويل */
+        .poem-box {
+            color: white;
+            font-size: 14px;
+            line-height: 1.8;
+            background: rgba(0,0,0,0.3);
+            padding: 15px;
+            border-radius: 15px;
+            text-align: right;
+            max-height: 250px;
             overflow-y: auto;
-            padding: 10px;
         }
     </style>
 </head>
 <body>
 
-<div id="app-container">
-    <div class="screen active" id="s1">
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIycXN3bmx3eXN3eXN3eXN3eXN3eXN3eXN3eXN3eXN3eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/vR4i7tOt9YpLID3U5T/giphy.gif">
-        <div class="question-text">انتي شهد؟</div>
-        <button onclick="showScreen('s2')">اي اسراء 🙋‍♀️</button>
+<div id="container">
+    <div class="step active" id="step1">
+        <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Smiling%20Face%20with%20Hearts.png" alt="kitty-1">
+        <div class="text-bubble">انتي شهد؟ 🌚</div>
+        <button onclick="go(2)">هلو شهد</button>
     </div>
 
-    <div class="screen" id="s2">
-        <img src="https://media.giphy.com/media/LpDmM2WXO6GfSeUgzS/giphy.gif">
-        <div class="question-text">اسراء عندي سؤال الجججج</div>
-        <button onclick="showScreen('s3')">شنو هو؟ 🤔</button>
+    <div class="step" id="step2">
+        <img src="https://i.pinimg.com/originals/91/92/79/91927907f9c87893c52e1248c8b18751.gif" alt="kitty-2">
+        <div class="text-bubble">شهد عندي سؤال الجججج 🌚</div>
+        <button onclick="go(3)">شنو هو؟</button>
     </div>
 
-    <div class="screen" id="s3">
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYzh0ZjZpMXF4eXN3bmx3eXN3eXN3eXN3eXN3eXN3eXN3eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/3oz8xRI3m4xP9V07hm/giphy.gif">
-        <div class="question-text">تحبين ديكستر لو لا؟؟ 🌝</div>
-        <button onclick="showScreen('s4')">هااا 🫣</button>
+    <div class="step" id="step3">
+        <img src="https://i.pinimg.com/originals/f3/04/70/f30470707a091d316773286f05295fce.gif" alt="kitty-3">
+        <div class="text-bubble">بس مستحي اسالك اياه 🌚</div>
+        <button onclick="go(4)">اسألني 😁</button>
     </div>
 
-    <div class="screen" id="s4">
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIycXN3bmx3eXN3eXN3eXN3eXN3eXN3eXN3eXN3eXN3eXN3eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/LpDmM2WXO6GfSeUgzS/giphy.gif">
-        <div class="question-text">اذا تحبين احمد دوسي على القلب</div>
-        <button class="heart-btn" onclick="showScreen('s5')">❤️</button>
+    <div class="step" id="step4">
+        <img src="https://i.pinimg.com/originals/05/92/62/059262e307730f5761a5e748928420e6.gif" alt="kitty-4">
+        <div class="text-bubble">تحبين ديكستر لو لا؟؟؟ 🌝</div>
+        <button onclick="go(5)">هاا؟</button>
     </div>
 
-    <div class="screen" id="s5">
-        <div class="question-text final-text">
+    <div class="step" id="step5">
+        <img src="https://i.pinimg.com/originals/9f/9b/6d/9f9b6d8b67f13b7080b9c3e9a56770f6.gif" alt="kitty-5">
+        <div class="text-bubble">اذا تحبين ديكستر دوسي على القلب ❤️</div>
+        <button class="heart-btn" onclick="go(6)">❤️</button>
+    </div>
+
+    <div class="step" id="step6">
+        <div class="poem-box">
             رأيتُ بوصف جمالكِ الأقوال ووراءكِ فاتننت بكِ العقول، ومن الله بكِ الجمال تجمل حتى صار لجمالك وقار.. <br><br>
-            أعشقك وأحبك ❤️
+            كسبت أجمل منظر ومع الجمال سكينة ووقار، والله ما طلعت شمس ولا غربت إلا وحبك مقرون بأنفاسي.. <br><br>
+            استسلمت قبل ألمسك، ففي عيني أمام عيونكِ مُستسلم. ❤️
+            <br><br>
+            <strong>أعشقك وأحبك ❤️</strong>
         </div>
-        <button onclick="location.reload()" style="width: auto;">العودة للبداية</button>
+        <button onclick="location.reload()" style="margin-top: 15px; background: #555;">العودة للبداية</button>
     </div>
 </div>
 
 <script>
-    function showScreen(screenId) {
-        // إخفاء كل الشاشات
-        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-        // إظهار الشاشة المطلوبة
-        document.getElementById(screenId).classList.add('active');
+    function go(id) {
+        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+        document.getElementById('step' + id).classList.add('active');
     }
 </script>
 
