@@ -1,269 +1,85 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<title>احبججججججججج شهددددددددددد</title>
-
-<style>
-body {
-    margin: 0;
-    font-family: Tahoma, Arial;
-    background: #000;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    text-align: center;
-    overflow: hidden;
-}
-
-/* قلوب متحركة */
-.heart {
-    position: fixed;
-    width: 18px;
-    height: 18px;
-    background: #ff0033;
-    transform: rotate(45deg);
-    animation: float 14s linear infinite;
-    opacity: 0.7;
-    pointer-events: none;
-}
-
-.heart::before,
-.heart::after {
-    content: "";
-    position: absolute;
-    width: 18px;
-    height: 18px;
-    background: #ff0033;
-    border-radius: 50%;
-}
-
-.heart::before { top: -9px; left: 0; }
-.heart::after { left: -9px; top: 0; }
-
-@keyframes float {
-    from { transform: translateY(100vh) rotate(45deg) scale(0.7); opacity: 0.8; }
-    to   { transform: translateY(-120vh) rotate(45deg) scale(1.3); opacity: 0; }
-}
-
-/* تفجير */
-.explode {
-    animation: explode 1.2s ease-out forwards !important;
-}
-
-@keyframes explode {
-    to {
-        transform: translate(
-            calc(-200px + 400px * var(--x)),
-            calc(-200px + 400px * var(--y))
-        ) scale(2) rotate(720deg);
-        opacity: 0;
-    }
-}
-
-/* صندوق */
-#box {
-    display: none;
-    max-width: 90%;
-    background: rgba(0,0,0,0.6);
-    padding: 25px;
-    border-radius: 25px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 0 40px rgba(255,0,80,0.4);
-}
-
-/* نص */
-#text {
-    min-height: 60px;
-    font-size: 22px;
-}
-
-img.main {
-    max-width: 100%;
-    border-radius: 20px;
-    margin-top: 15px;
-}
-
-.buttons {
-    margin-top: 20px;
-}
-
-button {
-    margin: 10px;
-    padding: 12px 35px;
-    font-size: 16px;
-    border: none;
-    border-radius: 40px;
-    cursor: pointer;
-    background: linear-gradient(135deg, #ff0033, #ff4d6d);
-    color: white;
-}
-
-.alert {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: black;
-    padding: 25px 35px;
-    border-radius: 20px;
-    font-size: 18px;
-    box-shadow: 0 0 40px rgba(255,0,80,0.8);
-    z-index: 999;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>هدية خاصة</title>
+    <style>
+        body {
+            background-color: #fce4ec; /* لون وردي فاتح */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            max-width: 400px;
+            width: 90%;
+        }
+        img {
+            width: 150px;
+            margin-bottom: 20px;
+        }
+        h2 { color: #d81b60; }
+        button {
+            background-color: #ff4081;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 15px;
+        }
+        button:hover { background-color: #c2185b; }
+        .hidden { display: none; }
+    </style>
 </head>
-
 <body>
 
-<div id="box">
-    <h2 id="text"></h2>
-    <img id="image" class="main">
-    <div class="buttons" id="buttons"></div>
+<div class="container" id="card">
+    <div id="step1">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIycXN3bmx3eXN3eXN3eXN3eXN3eXN3eXN3eXN3eXN3eXN3eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/vR4i7tOt9YpLID3U5T/giphy.gif" alt="Hello Kitty">
+        <h2>أنتي شهد؟</h2>
+        <button onclick="nextStep(2)">اي أنا ❤️</button>
+    </div>
+
+    <div id="step2" class="hidden">
+        <h2>عندي سؤال الج..</h2>
+        <button onclick="nextStep(3)">شنو هو؟ 🧐</button>
+    </div>
+
+    <div id="step3" class="hidden">
+        <h2>تحبين ديكستر لو لا؟</h2>
+        <button onclick="nextStep(4)">أكيد أحبه ❤️</button>
+    </div>
+
+    <div id="step4" class="hidden">
+        <h2 style="font-size: 1.2rem;">رأيتُ فيكِ جمالاً فاقَ الوصفَ.. <br> أعشقكِ يا كل دنيتي ❤️</h2>
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIycXN3bmx3eXN3eXN3eXN3eXN3eXN3eXN3eXN3eXN3eXN3eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/LpDmM2WXO6GfSeUgzS/giphy.gif" style="width:100px;">
+    </div>
 </div>
 
-<audio id="music" loop>
-    <source src="khalik_maaya.mp3" type="audio/mpeg">
-</audio>
-
 <script>
-// قلوب
-setInterval(() => {
-    const h = document.createElement("div");
-    h.className = "heart";
-    h.style.left = Math.random() * 100 + "vw";
-    h.style.animationDuration = (10 + Math.random() * 10) + "s";
-    document.body.appendChild(h);
-    setTimeout(() => h.remove(), 20000);
-}, 600);
+    function nextStep(stepNumber) {
+        // إخفاء كل الخطوات
+        document.getElementById('step1').classList.add('hidden');
+        document.getElementById('step2').classList.add('hidden');
+        document.getElementById('step3').classList.add('hidden');
+        document.getElementById('step4').classList.add('hidden');
 
-// الموسيقى
-const music = document.getElementById("music");
-let started = false;
-
-function playMusic() {
-    if (started) return;
-    started = true;
-    music.volume = 0;
-    music.play();
-    let v = 0;
-    const fade = setInterval(() => {
-        v += 0.05;
-        music.volume = v;
-        if (v >= 1) clearInterval(fade);
-    }, 200);
-}
-
-function stopMusic() {
-    music.pause();
-    music.currentTime = 0;
-}
-
-// تفجير القلوب
-function explodeHearts() {
-    document.querySelectorAll(".heart").forEach(h => {
-        h.style.setProperty("--x", Math.random());
-        h.style.setProperty("--y", Math.random());
-        h.classList.add("explode");
-        setTimeout(() => h.remove(), 1200);
-    });
-
-    for (let i = 0; i < 30; i++) {
-        const h = document.createElement("div");
-        h.className = "heart explode";
-        h.style.left = "50vw";
-        h.style.top = "50vh";
-        h.style.setProperty("--x", Math.random());
-        h.style.setProperty("--y", Math.random());
-        document.body.appendChild(h);
-        setTimeout(() => h.remove(), 1200);
+        // إظهار الخطوة المطلوبة
+        document.getElementById('step' + stepNumber).classList.remove('hidden');
     }
-}
-
-// الأسئلة
-const steps = [
-{ text: "انتِ شهد؟", img: "https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif",
-  buttons: [{ label: "إي", next: true }] },
-
-{ text: "هلو شهد 😍", img: "https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif",
-  buttons: [{ label: "هلا بيك ❤️", next: true }] },
-
-{ text: "هل تحبيني؟ 😘", img: "https://media.giphy.com/media/26FLdmIp6wJr91JAI/giphy.gif",
-  buttons: [{ label: "إي", alert: true }, { label: "لا", next: true }] },
-
-{ text: "ليش 😡", img: "https://media.giphy.com/media/3o7TKsQ8oQ6Z6R5EBy/giphy.gif",
-  buttons: [{ label: "أحسن ❤️", next: true }] },
-
-{ text: "انتِ متأكدة ماتحبيني؟", img: "https://media.giphy.com/media/l4FGuhL4U2WyjdkaY/giphy.gif",
-  buttons: [{ label: "إي", next: true }] },
-
-{ text: "عادي… لأن أدري تحبيني 😍😍😍",
-  img: "https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif",
-  buttons: [{ label: "شو انت واثق من نفسك؟ ولي ولي" }] }
-];
-
-let index = 0;
-const box = document.getElementById("box");
-box.style.display = "block";
-show();
-
-function typeText(el, text) {
-    el.innerHTML = "";
-    let i = 0;
-    const t = setInterval(() => {
-        el.innerHTML += text[i++];
-        if (i >= text.length) clearInterval(t);
-    }, 60);
-}
-
-function show() {
-    const step = steps[index];
-    const textEl = document.getElementById("text");
-    const imgEl = document.getElementById("image");
-    const btnBox = document.getElementById("buttons");
-
-    // حل مشكلة العربي
-if (step.text === "عادي… لأن أدري تحبيني 😍😍😍") {
-    textEl.innerText = step.text;
-} else {
-    typeText(textEl, step.text);
-}
-    imgEl.src = step.img;
-    btnBox.innerHTML = "";
-
-    step.buttons.forEach(btn => {
-        const b = document.createElement("button");
-        b.innerText = btn.label;
-
-        b.onclick = () => {
-            playMusic();
-
-            if (btn.label.includes("ولي ولي")) {
-                stopMusic();
-                explodeHearts();
-                const a = document.createElement("div");
-                a.className = "alert";
-                a.innerText = "لا مااروح لان ادري بيج تحبيني, تعرفين ليش...؟ لان اني احبجججج كلششششش كلشششش هوايييييي";
-                document.body.appendChild(a);
-                setTimeout(() => a.remove(), 4000);
-                return;
-            }
-
-            if (btn.alert) {
-                alert("نعتذر ما تكدر تختار إي 😔");
-                return;
-            }
-
-            if (btn.next && index < steps.length - 1) {
-                index++;
-                show();
-            }
-        };
-        btnBox.appendChild(b);
-    });
-}
 </script>
 
 </body>
